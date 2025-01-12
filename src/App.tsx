@@ -3,9 +3,13 @@ import EasyMDE from 'easymde';
 import 'easymde/dist/easymde.min.css'; // EasyMDE styles
 import * as marked from 'marked'; // For Markdown-to-HTML conversion
 import { useEffect, useRef, useState } from 'react';
+import TurndownService from 'turndown';
 import './App.css';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
+
+const htmlFromApi = '<p>Sample paragraph</p><h2>Sample header</h2><ul><li>Item 1</li><li>Item 2</li></ul>';
+
 
 function App() {
   const inputAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -13,9 +17,15 @@ function App() {
   const [htmlOutput, setHtmlOutput] = useState<string>('');
 
   useEffect(() => {
+    const turndownService = new TurndownService();
+    const markdownFromHtml = turndownService.turndown(htmlFromApi);
+
+    console.log('Markdown Output:', markdownFromHtml);
+
     if (inputAreaRef.current) {
       // Initialize EasyMDE
       easyMDE.current = new EasyMDE({
+        initialValue: markdownFromHtml,
         element: inputAreaRef.current,
         toolbar: [
           'bold', // Bold

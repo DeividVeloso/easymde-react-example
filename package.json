@@ -14,7 +14,8 @@
     "easymde": "^2.18.0",
     "marked": "^15.0.6",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "turndown": "^7.2.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
